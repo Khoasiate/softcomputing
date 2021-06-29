@@ -5,6 +5,7 @@ from tensorflow.python.keras.engine import input_layer
 from tensorflow.python.ops.gradients_util import _Inputs
 import tensorflow as tf
 
+
 # import tensorflow_hub as hub
 import time
 import string
@@ -48,25 +49,25 @@ def load_data():
             imageFolder = listdir("mnt/ramdisk/max/90kDICT32px/{}/{}".format(path, i))
             imageFolder.sort()
             for image in imageFolder:
-                print(image)
+                # print(image)
                 label = image.split("_")[1]
                 label = label + "".join([" " for _ in range(32 - len(label))])
-                print(label, ".")
+                # print(label, ".")
                 currentImage = read_img(
                     "mnt/ramdisk/max/90kDICT32px/{}/{}/{}".format(path, i, image)
                 )
-                print(np.shape(currentImage))
+                # print(np.shape(currentImage))
                 currentImage = np.pad(
                     currentImage,
                     ((0, 32 - len(currentImage)), (0, 512 - len(currentImage[0]))),
                     mode="constant",
                 )
-                print(np.shape(currentImage))
+                # print(np.shape(currentImage))
                 if not (label in images):
                     images[label] = []
-                else:
-                    print(images.keys())
-                print(type(images[label]))
+                # else:
+                #     print(images.keys())
+                # print(type(images[label]))
                 images[label].append(currentImage)
 
     return images
@@ -145,32 +146,24 @@ def train(data):
         activation="relu",
         kernel_initializer="variance_scaling",
     )(pool2)
-    # tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
-    # tf.keras.layers.Conv2D(
-    #     kernel_size=3,
-    #     filters=256,
-    #     strides=1,
-    #     activation="relu",
-    #     kernel_initializer="variance_scaling",
-    # ),
-    # tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2)),
-    # tf.keras.layers.Conv2D(
-    #     kernel_size=3,
-    #     filters=512,
-    #     strides=1,
-    #     activation="relu",
-    #     kernel_initializer="variance_scaling",
-    # ),
-    # tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2)),
-    # tf.keras.layers.Conv2D(
+    pool3 = tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2))(conv3)
+    conv4 = tf.keras.layers.Conv2D(
+        kernel_size=3,
+        filters=256,
+        strides=1,
+        activation="relu",
+        kernel_initializer="variance_scaling",
+    )(pool3)
+    pool4 = tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2))(conv4)
+    # conv6 = tf.keras.layers.Conv2D(
     #     kernel_size=3,
     #     filters=512,
     #     strides=1,
     #     activation="relu",
     #     kernel_initializer="variance_scaling",
-    # ),
-    # tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2)),
-    flatten1 = tf.keras.layers.Flatten()(conv3)
+    # )(pool5)
+    # pool6 = tf.keras.layers.MaxPooling2D(pool_size=(1, 2), strides=(1, 2))(conv6)
+    flatten1 = tf.keras.layers.Flatten()(pool4)
     # tf.keras.layers.Dense(
     #     units=400,
     #     activation="relu",
@@ -197,7 +190,7 @@ def train(data):
                 units=len(chars),
                 kernel_initializer="variance_scaling",
                 activation="softmax",
-            )(flatten1)
+            )(tf.keras.layers.Dense(units=7424, activation="relu")(flatten1))
             for i in range(32)
         ],
     )
@@ -208,15 +201,16 @@ def train(data):
     }
     model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
 
+    print(model.summary())
     # print(imgs.shape, labels.shape)
     model.fit(imgs.reshape(len(imgs), 32, 512, 1), labels, epochs=10)
     return model
 
 
 def evaluate(data, model):
-    labels, imgs = data[0], data[1]
+    labels, imgs = split_labels(data[0]), data[1]
 
-    print(model.evaluate(imgs.reshape(len(imgs), 32, 512, 1), labels, verbose=2))
+    print(model.evaluate(imgs.reshape(len(imgs), 32, 512, 1), labels, verbose=2)[32:])
 
 
 data = load_data()
