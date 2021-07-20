@@ -16,7 +16,7 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 | max_pooling2d (MaxPooling2D)   | (None, 14, 14, 8)    |        0 | conv2d[0][0]          |
 | conv2d_1 (Conv2D)              | (None, 10, 10, 16)   |     3216 | max_pooling2d[0][0]   |
 | max_pooling2d_1 (MaxPooling2D) | (None, 5, 5, 16)     |        0 | conv2d_1[0][0]        |
-| flatten (Flatten)              | (None, 400)          |        0 | max_pooling2d_3[0][0] |
+| flatten (Flatten)              | (None, 400)          |        0 | max_pooling2d_1[0][0] |
 | dense (Dense)                  | (None, 400)          |   160400 | flatten[0][0]         |
 | dense_1 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
 | dense_2 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
