@@ -128,6 +128,8 @@ training, test = split_data(data)
 
 model = train(training)
 
+print(model.summary())
+
 evaluate(test, model)
 
 model.save("model")
