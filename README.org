@@ -1,0 +1,90 @@
+#+TITLE: Softcomputing
+
+
+
+
+
+
+
+* Model
+
+
+
+CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output trainiert mit 200 Ordnern.
+
+
+
+
+
+
+
+** Model-Summary
+
+| Layer (type)                   | Output Shape         |  Param # | Connected to          |
+|--------------------------------+----------------------+----------+-----------------------|
+| conv2d (Conv2D)                | (None, 28, 28, 8)    |      208 |                       |
+| max_pooling2d (MaxPooling2D)   | (None, 14, 14, 8)    |        0 | conv2d[0][0]          |
+| conv2d_1 (Conv2D)              | (None, 10, 10, 16)   |     3216 | max_pooling2d[0][0]   |
+| max_pooling2d_1 (MaxPooling2D) | (None, 5, 5, 16)     |        0 | conv2d_1[0][0]        |
+| flatten (Flatten)              | (None, 400)          |        0 | max_pooling2d_1[0][0] |
+| dense (Dense)                  | (None, 400)          |   160400 | flatten[0][0]         |
+| dense_1 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
+| dense_2 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
+| dense_3 (Dense)                | (None, 62)           |    24862 | flatten[0][0]         |
+
+
+
+Total params: 509,486
+
+Trainable params: 509,486
+
+Non-trainable params: 0
+
+
+
+** Evaluation
+
+394/394 - 1s - loss: 0.9960 - accuracy: 0.8010
+
+** Trainingsausgabe
+
+Epoch 1/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 1.3396 - accuracy: 0.6301
+
+Epoch 2/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.4057 - accuracy: 0.8457
+
+Epoch 3/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.3255 - accuracy: 0.8703
+
+Epoch 4/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2699 - accuracy: 0.8904
+
+Epoch 5/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2398 - accuracy: 0.8988
+
+Epoch 6/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2314 - accuracy: 0.9051
+
+Epoch 7/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2073 - accuracy: 0.9133
+
+Epoch 8/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.1956 - accuracy: 0.9170
+
+Epoch 9/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.1909 - accuracy: 0.9179
+
+Epoch 10/10
+
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.1821 - accuracy: 0.9224
+
