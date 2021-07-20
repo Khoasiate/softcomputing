@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Efficiently finding frequent itemsets with FP-growth</title>
+    <meta name="author" content="Dang-Khoa Tran, Niklas Zabel" />
+    <style type="text/css">
+      .underline {
+        text-decoration: underline;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/dist/reveal.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/dist/theme/black.css"
+      id="theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section id="sec-title-slide">
+          <h2>Efficiently finding frequent itemsets with FP-growth</h2>
+          <h4>Dang-Khoa Tran, Niklas Zabel</h4>
+        </section>
+        <section id="table-of-contents-section">
+          <div id="table-of-contents">
+            <h2>Table of Contents</h2>
+            <div id="text-table-of-contents">
+              <ul>
+                <li><a href="#/slide-1">1. Anwendungzweck</a></li>
+                <li>
+                  <a href="#/slide-2">2. Frequent Pattern Trees</a>
+                  <ul>
+                    <li><a href="#/slide-2-1">2.1. Aufbau</a></li>
+                    <li>
+                      <a href="#/slide-2-2">2.2. Konstruktion</a>
+                      <ul>
+                        <li>
+                          <a href="#/slide-2-2-1"
+                            >2.2.1. Aufbereitung der Daten</a
+                          >
+                        </li>
+                        <li><a href="#/slide-2-2-2">2.2.2. Add {z, r}</a></li>
+                        <li>
+                          <a href="#/slide-2-2-3">2.2.3. Add {z, x, y, s, t}</a>
+                        </li>
+                        <li><a href="#/slide-2-2-4">2.2.4. Finaler Baum</a></li>
+                        <li>
+                          <a href="#/slide-2-2-5"
+                            >2.2.5. Finaler Baum mit Header-Table</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="#/slide-3">3. Fazit</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <section id="slide-1">
+            <h2 id="1">
+              <span class="section-number-2">1</span> Anwendungzweck
+            </h2>
+            <ul>
+              <li>
+                Finden verknüpfter Daten
+                <ul>
+                  <li>Autovervollständigung</li>
+                  <li>Analyse von Twitter-Themen</li>
+                  <li>Recommendation-Engines</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section id="slide-2">
+            <h2 id="2">
+              <span class="section-number-2">2</span> Frequent Pattern Trees
+            </h2>
+            <div class="outline-text-2" id="text-2"></div>
+          </section>
+          <section id="slide-2-1">
+            <div id="org8348c23" class="figure">
+              <p>
+                <object type="image/svg+xml" data="./SC4.svg" class="org-svg">
+                  Sorry, your browser does not support SVG.
+                </object>
+              </p>
+            </div>
+          </section>
+          <section id="slide-2-2">
+            <h3 id="2-2">
+              <span class="section-number-3">2.2</span> Konstruktion
+            </h3>
+            <div class="outline-text-3" id="text-2-2"></div>
+          </section>
+          <section id="slide-2-2-1">
+            <h4 id="2-2-1">
+              <span class="section-number-4">2.2.1</span> Aufbereitung der Daten
+            </h4>
+            <table
+              border="2"
+              cellspacing="0"
+              cellpadding="6"
+              rules="groups"
+              frame="hsides"
+            >
+              <colgroup>
+                <col class="org-right" />
+
+                <col class="org-left" />
+
+                <col class="org-left" />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <td class="org-right">TID</td>
+                  <td class="org-left">Datensatz</td>
+                  <td class="org-left">Aufbereiter Datensatz</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">001</td>
+                  <td class="org-left">r, z, h, j, p</td>
+                  <td class="org-left">z, r</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">002</td>
+                  <td class="org-left">z, y, x, w, v, u, t, s</td>
+                  <td class="org-left">z, x, y, s, t</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">003</td>
+                  <td class="org-left">z</td>
+                  <td class="org-left">z</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">004</td>
+                  <td class="org-left">r, x, n, o, s</td>
+                  <td class="org-left">x, s, r</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">005</td>
+                  <td class="org-left">y, r, x, z, q, t, p</td>
+                  <td class="org-left">z, x, y, r, t</td>
+                </tr>
+
+                <tr>
+                  <td class="org-right">006</td>
+                  <td class="org-left">y, z, x, e, q, s, t, m</td>
+                  <td class="org-left">z, x, y, s, t</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section id="slide-2-2-2">
+            <h4>2.2.2. Add {z, r}</h4>
+
+            <div id="org19e8f39" class="figure">
+              <p>
+                <object type="image/svg+xml" data="./SC1.svg" class="org-svg">
+                  Sorry, your browser does not support SVG.
+                </object>
+              </p>
+            </div>
+          </section>
+          <section id="slide-2-2-3" style="position: relative">
+            <div
+              style="
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
+              "
+            >
+              <h4 style="z-index: 999; background-color: rgba(0, 0, 0, 60%)">
+                2.2.3. Add {z, x, y, s, t}
+              </h4>
+            </div>
+
+            <div id="org1dc082c" class="figure">
+              <p>
+                <object type="image/svg+xml" data="./SC2.svg" class="org-svg">
+                  Sorry, your browser does not support SVG.
+                </object>
+              </p>
+            </div>
+          </section>
+          <section id="slide-2-2-4">
+            <div id="orgabfdea1" class="figure">
+              <p>
+                <object type="image/svg+xml" data="./SC3.svg" class="org-svg">
+                  Sorry, your browser does not support SVG.
+                </object>
+              </p>
+            </div>
+          </section>
+          <section id="slide-2-2-5">
+            <div id="orgb4ffefa" class="figure">
+              <p>
+                <object type="image/svg+xml" data="./SC4.svg" class="org-svg">
+                  Sorry, your browser does not support SVG.
+                </object>
+              </p>
+            </div>
+          </section>
+        </section>
+        <section>
+          <section id="slide-3">
+            <h2 id="3"><span class="section-number-2">3</span> Fazit</h2>
+            <ul>
+              <li>
+                Geringes Durchlaufen des Datensets (2x)
+                <ul>
+                  <li>Schnell</li>
+                  <li>Effizient</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </div>
+    <script src="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/dist/reveal.js"></script>
+    <script src="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/plugin/markdown/markdown.js"></script>
+    <script src="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/plugin/notes/notes.js"></script>
+    <script src="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/plugin/search/search.js"></script>
+    <script src="/Users/khoa/.emacs.d/.local/straight/build-27.2/revealjs/plugin/zoom/zoom.js"></script>
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: false,
+        center: true,
+        slideNumber: "c",
+        rollingLinks: false,
+        keyboard: true,
+        mouseWheel: false,
+        fragmentInURL: false,
+        hashOneBasedIndex: false,
+        pdfSeparateFragments: true,
+
+        overview: true,
+
+        transition: "slide",
+        transitionSpeed: "default",
+
+        // Plugins with reveal.js 4.x
+        plugins: [RevealMarkdown, RevealNotes, RevealSearch, RevealZoom],
+
+        // Optional libraries used to extend reveal.js
+        dependencies: [],
+      });
+    </script>
+  </body>
+</html>

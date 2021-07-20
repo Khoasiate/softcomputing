@@ -28,8 +28,17 @@ print(chars)
 def read_img(path):
     img = Image.open(path).convert("L")
 
+    width, height = img.size
+
+    if width > 256:
+        img = np.asarray(img.resize((256, 32)))
+    else:
+        img = np.pad(
+            np.asarray(img), ((0, 32 - height), (0, 256 - width)), mode="constant"
+        )
+
     # img = img.resize((32, 32))
-    return np.asarray(img) / 255
+    return img / 255
 
 
 def load_data():
@@ -41,8 +50,8 @@ def load_data():
     imgFolder.sort()
 
     images = {}
-    for path in imgFolder[0:1]:
-        path = "1"
+    for path in range(1, 101):
+        print(path)
         imgPaths = listdir("mnt/ramdisk/max/90kDICT32px/{}".format(path))
         imgPaths.sort()
         for i in imgPaths:
@@ -51,17 +60,22 @@ def load_data():
             for image in imageFolder:
                 # print(image)
                 label = image.split("_")[1]
-                label = label + "".join([" " for _ in range(32 - len(label))])
+                label = label + "".join([" " for _ in range(16 - len(label))])
                 # print(label, ".")
                 currentImage = read_img(
                     "mnt/ramdisk/max/90kDICT32px/{}/{}/{}".format(path, i, image)
                 )
                 # print(np.shape(currentImage))
-                currentImage = np.pad(
-                    currentImage,
-                    ((0, 32 - len(currentImage)), (0, 512 - len(currentImage[0]))),
-                    mode="constant",
-                )
+                # currentImage = (
+                #     np.pad(
+                #         currentImage,
+                #         ((0, 32 - len(currentImage)), (0, 512 - len(currentImage[0]))),
+                #         mode="constant",
+                #     )
+                #     .reshape((32, 256, 1))
+                #     .max(4)
+                #     .max(2)
+                # )
                 # print(np.shape(currentImage))
                 if not (label in images):
                     images[label] = []
@@ -99,30 +113,31 @@ def split_data(labels, imgs):
 def flatten_dictionary(data):
     labels = []
     imgs = []
-    max = 0
+
     for (key, imgArray) in data.items():
-        idx = np.array([chars.find(c) for c in key])
+        idx = np.array([chars.find(c) for c in key], dtype="int")
         for img in imgArray:
             labels.append(idx)
-            max = maximum(max, len(img))
             imgs.append(img)
+
     print("Here:", np.shape(imgs))
-    return np.array(labels, dtype="int"), np.array(imgs)
+    print(np.shape(labels))
+    return np.array(labels), np.array(imgs)
 
 
 def split_labels(labels):
-    results = [[] for _ in range(32)]
+    results = [[] for _ in range(16)]
 
     for label in labels:
-        for i in range(32):
+        for i in range(16):
             results[i].append(label[i])
 
-    return {f"output_{i}": np.asarray(results[i]) for i in range(32)}
+    return {f"output_{i}": np.asarray(results[i]) for i in range(16)}
 
 
 def train(data):
     labels, imgs = split_labels(data[0]), data[1]
-    input_layer = tf.keras.Input(shape=(32, 512, 1))
+    input_layer = tf.keras.Input(shape=(32, 256, 1))
     conv1 = tf.keras.layers.Conv2D(
         kernel_size=5,
         filters=32,
@@ -190,27 +205,27 @@ def train(data):
                 units=len(chars),
                 kernel_initializer="variance_scaling",
                 activation="softmax",
-            )(tf.keras.layers.Dense(units=7424, activation="relu")(flatten1))
-            for i in range(32)
+            )(tf.keras.layers.Dense(units=3328, activation="relu")(flatten1))
+            for i in range(16)
         ],
     )
 
     loss_fn = {
         f"output_{i}": tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False)
-        for i in range(32)
+        for i in range(16)
     }
     model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
 
     print(model.summary())
     # print(imgs.shape, labels.shape)
-    model.fit(imgs.reshape(len(imgs), 32, 512, 1), labels, epochs=10)
+    model.fit(imgs.reshape(len(imgs), 32, 256, 1), labels, epochs=10)
     return model
 
 
 def evaluate(data, model):
     labels, imgs = split_labels(data[0]), data[1]
 
-    print(model.evaluate(imgs.reshape(len(imgs), 32, 512, 1), labels, verbose=2)[32:])
+    print(model.evaluate(imgs.reshape(len(imgs), 32, 256, 1), labels, verbose=2)[16:])
 
 
 data = load_data()
@@ -225,6 +240,7 @@ training, test = split_data(labels, imgs)
 # plt.show()
 
 model = train(training)
+# model = tf.keras.models.load_model("model")
 
 evaluate(test, model)
 

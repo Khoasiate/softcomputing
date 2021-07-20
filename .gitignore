@@ -1,5 +1,6 @@
 *.tex
-*.html
+# *.html
 *.svg
-*.org
+# *.org
 .auctex-auto
+mnt/

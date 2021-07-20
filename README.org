@@ -1,0 +1,89 @@
+#+TITLE: Softcomputing
+
+* Model
+CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output trainiert mit 200 Ordnern.
+
+** Model-Summary
+| Layer (type)                   | Output Shape         |  Param # | Connected to          |
+|--------------------------------+----------------------+----------+-----------------------|
+| input_1 (InputLayer)           | [(None, 32, 256, 1)] |        0 |                       |
+| conv2d (Conv2D)                | (None, 28, 252, 32)  |      832 | input_1[0][0]         |
+| max_pooling2d (MaxPooling2D)   | (None, 14, 126, 32)  |        0 | conv2d[0][0]          |
+| conv2d_1 (Conv2D)              | (None, 10, 122, 64)  |    51264 | max_pooling2d[0][0]   |
+| max_pooling2d_1 (MaxPooling2D) | (None, 5, 61, 64)    |        0 | conv2d_1[0][0]        |
+| conv2d_2 (Conv2D)              | (None, 3, 59, 128)   |    73856 | max_pooling2d_1[0][0] |
+| max_pooling2d_2 (MaxPooling2D) | (None, 3, 29, 128)   |        0 | conv2d_2[0][0]        |
+| conv2d_3 (Conv2D)              | (None, 1, 27, 256)   |   295168 | max_pooling2d_2[0][0] |
+| max_pooling2d_3 (MaxPooling2D) | (None, 1, 13, 256)   |        0 | conv2d_3[0][0]        |
+| flatten (Flatten)              | (None, 3328)         |        0 | max_pooling2d_3[0][0] |
+| dense (Dense)                  | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_1 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_2 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_3 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_4 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_5 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_6 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_7 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_8 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_9 (Dense)                | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_10 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_11 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_12 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_13 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_14 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| dense_15 (Dense)               | (None, 3328)         | 11078912 | flatten[0][0]         |
+| output_0 (Dense)               | (None, 63)           |   209727 | dense[0][0]           |
+| output_1 (Dense)               | (None, 63)           |   209727 | dense_1[0][0]         |
+| output_2 (Dense)               | (None, 63)           |   209727 | dense_2[0][0]         |
+| output_3 (Dense)               | (None, 63)           |   209727 | dense_3[0][0]         |
+| output_4 (Dense)               | (None, 63)           |   209727 | dense_4[0][0]         |
+| output_5 (Dense)               | (None, 63)           |   209727 | dense_5[0][0]         |
+| output_6 (Dense)               | (None, 63)           |   209727 | dense_6[0][0]         |
+| output_7 (Dense)               | (None, 63)           |   209727 | dense_7[0][0]         |
+| output_8 (Dense)               | (None, 63)           |   209727 | dense_8[0][0]         |
+| output_9 (Dense)               | (None, 63)           |   209727 | dense_9[0][0]         |
+| output_10 (Dense)              | (None, 63)           |   209727 | dense_10[0][0]        |
+| output_11 (Dense)              | (None, 63)           |   209727 | dense_11[0][0]        |
+| output_12 (Dense)              | (None, 63)           |   209727 | dense_12[0][0]        |
+| output_13 (Dense)              | (None, 63)           |   209727 | dense_13[0][0]        |
+| output_14 (Dense)              | (None, 63)           |   209727 | dense_14[0][0]        |
+| output_15 (Dense)              | (None, 63)           |   209727 | dense_15[0][0]        |
+
+Total params: 181,039,344 \\
+Trainable params: 181,039,344 \\
+Non-trainable params: 0 \\
+
+** Evaluation
+1916/1916 - 81s - loss: 24.7355 - \\
+output_0_loss: 1.9995 - \\
+output_1_loss: 1.6809 - \\
+output_2_loss: 1.9995 - \\
+output_3_loss: 2.2953 - \\
+output_4_loss: 2.4553 - \\
+output_5_loss: 2.5818 - \\
+output_6_loss: 2.5054 - \\
+output_7_loss: 2.3605 - \\
+output_8_loss: 1.9611 - \\
+output_9_loss: 1.5816 - \\
+output_10_loss: 1.1727 - \\
+output_11_loss: 0.8574 - \\
+output_12_loss: 0.5594 - \\
+output_13_loss: 0.3767 - \\
+output_14_loss: 0.2123 - \\
+output_15_loss: 0.1362 - \\
+output_0_output_0_output_0_accuracy: 0.6317 - \\
+output_1_output_1_output_1_accuracy: 0.7067 - \\
+output_2_output_2_output_2_accuracy: 0.6401 - \\
+output_3_output_3_output_3_accuracy: 0.5874 - \\
+output_4_output_4_output_4_accuracy: 0.5544 - \\
+output_5_output_5_output_5_accuracy: 0.5352 - \\
+output_6_output_6_output_6_accuracy: 0.5447 - \\
+output_7_output_7_output_7_accuracy: 0.6002 - \\
+output_8_output_8_output_8_accuracy: 0.6765 - \\
+output_9_output_9_output_9_accuracy: 0.7658 - \\
+output_10_output_10_output_10_accuracy: 0.8441 - \\
+output_11_output_11_output_11_accuracy: 0.9058 - \\
+output_12_output_12_output_12_accuracy: 0.9441 - \\
+output_13_output_13_output_13_accuracy: 0.9726 - \\
+output_14_output_14_output_14_accuracy: 0.9875 - \\
+output_15_output_15_output_15_accuracy: 0.9949 \\

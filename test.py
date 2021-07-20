@@ -13,18 +13,24 @@ print(model.summary())
 def read_img(path):
     img = Image.open(path)
 
-    img = img.resize((32, 32))
+    # img = img.resize((32, 32))
     return np.asarray(img) / 255
 
 
 def test_data():
-    imgPaths = list(filter(lambda x: not x.startswith("."), listdir("Images")))
+    imgPaths = list(
+        filter(
+            lambda x: not x.startswith("."), listdir("./mnt/ramdisk/max/90kDICT32px")
+        )
+    )
     imgPaths.sort()
     images = []
     for i in range(62):
-        imgPathsPaths = listdir("Images/{}".format(imgPaths[i]))
+        imgPathsPaths = listdir("mnt/ramdisk/max/90kDICT32px/{}".format(imgPaths[i]))
         imgPathsPaths.sort()
-        img = read_img("Images/{}/{}".format(imgPaths[i], imgPathsPaths[0]))
+        img = read_img(
+            "mnt/ramdisk/max/90kDICT32px/{}/{}".format(imgPaths[i], imgPathsPaths[0])
+        )
         images.append(img)
 
     for i in range(len(images)):
