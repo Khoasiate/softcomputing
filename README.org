@@ -10,67 +10,67 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 
 ** Model-Summary
 
-| Layer (type)                   | Output Shape         |  Param # | Connected to          |
-|--------------------------------+----------------------+----------+-----------------------|
-| conv2d (Conv2D)                | (None, 28, 28, 8)    |      208 |                       |
-| max_pooling2d (MaxPooling2D)   | (None, 14, 14, 8)    |        0 | conv2d[0][0]          |
-| conv2d_1 (Conv2D)              | (None, 10, 10, 16)   |     3216 | max_pooling2d[0][0]   |
-| max_pooling2d_1 (MaxPooling2D) | (None, 5, 5, 16)     |        0 | conv2d_1[0][0]        |
-| flatten (Flatten)              | (None, 400)          |        0 | max_pooling2d_1[0][0] |
-| dense (Dense)                  | (None, 400)          |   160400 | flatten[0][0]         |
-| dense_1 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
-| dense_2 (Dense)                | (None, 400)          |   160400 | flatten[0][0]         |
-| dense_3 (Dense)                | (None, 62)           |    24862 | flatten[0][0]         |
+| Layer (type)                   | Output Shape       | Param # | Connected to    |
+|--------------------------------+--------------------+---------+-----------------|
+| conv2d (Conv2D)                | (None, 28, 28, 8)  |     208 |                 |
+| max_pooling2d (MaxPooling2D)   | (None, 14, 14, 8)  |       0 | conv2d          |
+| conv2d_1 (Conv2D)              | (None, 10, 10, 16) |    3216 | max_pooling2d   |
+| max_pooling2d_1 (MaxPooling2D) | (None, 5, 5, 16)   |       0 | conv2d_1        |
+| flatten (Flatten)              | (None, 400)        |       0 | max_pooling2d_1 |
+| dense (Dense)                  | (None, 400)        |  160400 | flatten         |
+| dense_1 (Dense)                | (None, 200)        |   80200 | dense_1         |
+| dense_2 (Dense)                | (None, 100)        |   20100 | dense_2         |
+| dense_3 (Dense)                | (None, 62)         |    6262 | dense_3         |
 
-Total params: 509,486
 
-Trainable params: 509,486
+Total params: 270,386
+
+Trainable params: 270,386
 
 Non-trainable params: 0
 
 ** Evaluation
 
-394/394 - 1s - loss: 0.9960 - accuracy: 0.8010
+394/394 - 1s - loss: 1.0729 - accuracy: 0.8027
 
 ** Trainingsausgabe
 
 Epoch 1/10
 
-1576/1576 [==============================] - 11s 6ms/step - loss: 1.3553 - accuracy: 0.6294
+1576/1576 [==============================] - 10s 6ms/step - loss: 1.4404 - accuracy: 0.6114
 
 Epoch 2/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.4080 - accuracy: 0.8454
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.4315 - accuracy: 0.8426
 
 Epoch 3/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.3139 - accuracy: 0.8722
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.3233 - accuracy: 0.8732
 
 Epoch 4/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.2656 - accuracy: 0.8915
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2775 - accuracy: 0.8874
 
 Epoch 5/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.2352 - accuracy: 0.9025
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2498 - accuracy: 0.8966
 
 Epoch 6/10
 
-
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.2178 - accuracy: 0.9088
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2293 - accuracy: 0.9040
 
 Epoch 7/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.2033 - accuracy: 0.9143
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2123 - accuracy: 0.9108
 
 Epoch 8/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.1881 - accuracy: 0.9192
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.2093 - accuracy: 0.9135
 
 Epoch 9/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.1820 - accuracy: 0.9232
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.1879 - accuracy: 0.9200
 
 Epoch 10/10
 
-1576/1576 [==============================] - 10s 6ms/step - loss: 0.1875 - accuracy: 0.9214
+1576/1576 [==============================] - 10s 6ms/step - loss: 0.1871 - accuracy: 0.9204

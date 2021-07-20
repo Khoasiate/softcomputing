@@ -88,11 +88,11 @@ def train(data):
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=400,
+                units=200,
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=400,
+                units=100,
                 activation="relu",
             ),
             tf.keras.layers.Dense(
@@ -127,6 +127,8 @@ training, test = split_data(data)
 # plt.show()
 
 model = train(training)
+
+print(model.summary())
 
 evaluate(test, model)
 
