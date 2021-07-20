@@ -49,41 +49,76 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 | output_14 (Dense)              | (None, 63)           |   209727 | dense_14[0][0]        |
 | output_15 (Dense)              | (None, 63)           |   209727 | dense_15[0][0]        |
 
-Total params: 181,039,344 \n
-Trainable params: 181,039,344 \n
-Non-trainable params: 0 \n
+Total params: 181,039,344 
+
+Trainable params: 181,039,344
+
+Non-trainable params: 0 
+
 
 ** Evaluation
-1916/1916 - 81s - loss: 24.7355 - \n
-output_0_loss: 1.9995 - \n
-output_1_loss: 1.6809 - \n
-output_2_loss: 1.9995 - \n
-output_3_loss: 2.2953 - \n
-output_4_loss: 2.4553 - \n
-output_5_loss: 2.5818 - \n
-output_6_loss: 2.5054 - \n
-output_7_loss: 2.3605 - \n
-output_8_loss: 1.9611 - \n
-output_9_loss: 1.5816 - \n
-output_10_loss: 1.1727 - \n
-output_11_loss: 0.8574 - \n
-output_12_loss: 0.5594 - \n
-output_13_loss: 0.3767 - \n
-output_14_loss: 0.2123 - \n
-output_15_loss: 0.1362 - \n
-output_0_output_0_output_0_accuracy: 0.6317 - \n
-output_1_output_1_output_1_accuracy: 0.7067 - \n
-output_2_output_2_output_2_accuracy: 0.6401 - \n
-output_3_output_3_output_3_accuracy: 0.5874 - \n
-output_4_output_4_output_4_accuracy: 0.5544 - \n
-output_5_output_5_output_5_accuracy: 0.5352 - \n
-output_6_output_6_output_6_accuracy: 0.5447 - \n
-output_7_output_7_output_7_accuracy: 0.6002 - \n
-output_8_output_8_output_8_accuracy: 0.6765 - \n
-output_9_output_9_output_9_accuracy: 0.7658 - \n
-output_10_output_10_output_10_accuracy: 0.8441 - \n
-output_11_output_11_output_11_accuracy: 0.9058 - \n
-output_12_output_12_output_12_accuracy: 0.9441 - \n
-output_13_output_13_output_13_accuracy: 0.9726 - \n
-output_14_output_14_output_14_accuracy: 0.9875 - \n
-output_15_output_15_output_15_accuracy: 0.9949 \n
+1916/1916 - 81s - loss: 24.7355 - 
+
+output_0_loss: 1.9995 - 
+
+output_1_loss: 1.6809 - 
+
+output_2_loss: 1.9995 - 
+
+output_3_loss: 2.2953 - 
+
+output_4_loss: 2.4553 - 
+
+output_5_loss: 2.5818 - 
+
+output_6_loss: 2.5054 - 
+
+output_7_loss: 2.3605 - 
+
+output_8_loss: 1.9611 - 
+
+output_9_loss: 1.5816 - 
+
+output_10_loss: 1.1727 - 
+
+output_11_loss: 0.8574 - 
+
+output_12_loss: 0.5594 - 
+
+output_13_loss: 0.3767 - 
+
+output_14_loss: 0.2123 - 
+
+output_15_loss: 0.1362 - 
+
+output_0_output_0_output_0_accuracy: 0.6317 - 
+
+output_1_output_1_output_1_accuracy: 0.7067 - 
+
+output_2_output_2_output_2_accuracy: 0.6401 - 
+
+output_3_output_3_output_3_accuracy: 0.5874 - 
+
+output_4_output_4_output_4_accuracy: 0.5544 - 
+
+output_5_output_5_output_5_accuracy: 0.5352 - 
+
+output_6_output_6_output_6_accuracy: 0.5447 - 
+
+output_7_output_7_output_7_accuracy: 0.6002 - 
+
+output_8_output_8_output_8_accuracy: 0.6765 - 
+
+output_9_output_9_output_9_accuracy: 0.7658 - 
+
+output_10_output_10_output_10_accuracy: 0.8441 - 
+
+output_11_output_11_output_11_accuracy: 0.9058 - 
+
+output_12_output_12_output_12_accuracy: 0.9441 - 
+
+output_13_output_13_output_13_accuracy: 0.9726 - 
+
+output_14_output_14_output_14_accuracy: 0.9875 - 
+
+output_15_output_15_output_15_accuracy: 0.9949 
