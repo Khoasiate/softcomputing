@@ -85,14 +85,17 @@ def train(data):
             tf.keras.layers.Flatten(),
             tf.keras.layers.Dense(
                 units=400,
+                kernel_initializer="variance_scaling",
                 activation="relu",
             ),
             tf.keras.layers.Dense(
                 units=400,
+                kernel_initializer="variance_scaling",
                 activation="relu",
             ),
             tf.keras.layers.Dense(
                 units=400,
+                kernel_initializer="variance_scaling",
                 activation="relu",
             ),
             tf.keras.layers.Dense(
@@ -127,6 +130,8 @@ training, test = split_data(data)
 # plt.show()
 
 model = train(training)
+
+print(model.summary())
 
 evaluate(test, model)
 
