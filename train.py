@@ -84,10 +84,6 @@ def train(data):
             tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
             tf.keras.layers.Flatten(),
             tf.keras.layers.Dense(
-                units=400,
-                activation="relu",
-            ),
-            tf.keras.layers.Dense(
                 units=len(chars),
                 kernel_initializer="variance_scaling",
                 activation="softmax",
