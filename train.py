@@ -81,15 +81,15 @@ def train(data):
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=32 * 32,
+                units=16 * 32,
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=32 * 32,
+                units=8 * 32,
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=32 * 32,
+                units=4 * 32,
                 activation="relu",
             ),
             tf.keras.layers.Dense(

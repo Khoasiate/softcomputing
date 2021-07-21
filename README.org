@@ -16,41 +16,41 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 | dense (Dense)     | (None, 1024) | 1049600 | flatten      |
 | dense_1 (Dense)   | (None, 1024) | 1049600 | dense        |
 | dense_2 (Dense)   | (None, 1024) | 1049600 | dense_1      |
-| dense_3 (Dense)   | (None, 1024) | 1049600 | dense_2      |
-| dense_4 (Dense)   | (None, 1024) | 1049600 | dense_3      |
-| dense_5 (Dense)   | (None, 1024) | 1049600 | dense_4      |
-| dense_6 (Dense)   | (None, 62)   |   63550 | dense_5      |
+| dense_3 (Dense)   | (None, 512)  |  524800 | dense_2      |
+| dense_4 (Dense)   | (None, 256)  |  131328 | dense_3      |
+| dense_5 (Dense)   | (None, 128)  |   32896 | dense_4      |
+| dense_6 (Dense)   | (None, 62)   |    7998 | dense_5      |
 
 
-Total params: 6,361,150
+Total params: 3,845,822
 
-Trainable params: 6,361,150
+Trainable params: 3,845,822
 
 Non-trainable params: 0
 
 
 ** Evaluation
 
-394/394 - 2s - loss: 1.2158 - accuracy: 0.6880
+394/394 - 1s - loss: 1.2016 - accuracy: 0.7032
 
 ** Trainingsausgabe
 
 Epoch 1/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 2.8792 - accuracy: 0.1980
+1576/1576 [==============================] - 12s 8ms/step - loss: 2.8760 - accuracy: 0.2212
 
 Epoch 2/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 1.0697 - accuracy: 0.6557
+1576/1576 [==============================] - 12s 8ms/step - loss: 1.0192 - accuracy: 0.6796
 
 Epoch 3/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.8693 - accuracy: 0.7190
+1576/1576 [==============================] - 12s 8ms/step - loss: 0.8099 - accuracy: 0.7375
 
 Epoch 4/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.7433 - accuracy: 0.7558
+1576/1576 [==============================] - 12s 8ms/step - loss: 0.7067 - accuracy: 0.7644
 
 Epoch 5/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.6561 - accuracy: 0.7772
+1576/1576 [==============================] - 12s 8ms/step - loss: 0.6202 - accuracy: 0.7889
