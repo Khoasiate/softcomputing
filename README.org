@@ -10,65 +10,48 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 
 ** Model-Summary
 
-| Layer (type)                   | Output Shape       | Param # | Connected to    |
-|--------------------------------+--------------------+---------+-----------------|
-| conv2d (Conv2D)                | (None, 28, 28, 8)  |     208 |                 |
-| max_pooling2d (MaxPooling2D)   | (None, 14, 14, 8)  |       0 | conv2d          |
-| conv2d_1 (Conv2D)              | (None, 10, 10, 16) |    3216 | max_pooling2d   |
-| max_pooling2d_1 (MaxPooling2D) | (None, 5, 5, 16)   |       0 | conv2d_1        |
-| flatten (Flatten)              | (None, 400)        |       0 | max_pooling2d_1 |
-| dense_1 (Dense)                | (None, 62)         |   24862 | flatten         |
+| Layer (type)      | Output Shape | Param # | Connected to |
+|-------------------+--------------+---------+--------------|
+| flatten (Flatten) | (None, 1024) |       0 |              |
+| dense (Dense)     | (None, 1024) | 1049600 | flatten      |
+| dense_1 (Dense)   | (None, 1024) | 1049600 | dense        |
+| dense_2 (Dense)   | (None, 1024) | 1049600 | dense_1      |
+| dense_3 (Dense)   | (None, 1024) | 1049600 | dense_2      |
+| dense_4 (Dense)   | (None, 1024) | 1049600 | dense_3      |
+| dense_5 (Dense)   | (None, 1024) | 1049600 | dense_4      |
+| dense_6 (Dense)   | (None, 1024) | 1049600 | dense_5      |
+| dense_7 (Dense)   | (None, 62)   |   63550 | dense_6      |
 
 
-Total params: 28,286
+Total params: 7,410,750
 
-Trainable params: 28,286
+Trainable params: 7,410,750
 
 Non-trainable params: 0
 
 
 ** Evaluation
 
-394/394 - 1s - loss: 1.0499 - accuracy: 0.8026
+394/394 - 2s - loss: 1.2350 - accuracy: 0.6844
 
 ** Trainingsausgabe
 
-Epoch 1/10
+Epoch 1/5
 
-1576/1576 [==============================] - 8s 5ms/step - loss: 1.5290 - accuracy: 0.6170
+1576/1576 [==============================] - 21s 13ms/step - loss: 3.3637 - accuracy: 0.1023
 
-Epoch 2/10
+Epoch 2/5
 
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.5172 - accuracy: 0.8327
+1576/1576 [==============================] - 20s 13ms/step - loss: 1.3336 - accuracy: 0.5867
 
-Epoch 3/10
+Epoch 3/5
 
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.3919 - accuracy: 0.8644
+1576/1576 [==============================] - 20s 13ms/step - loss: 0.9666 - accuracy: 0.6913
 
-Epoch 4/10
+Epoch 4/5
 
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.3473 - accuracy: 0.8750
+1576/1576 [==============================] - 20s 13ms/step - loss: 0.8540 - accuracy: 0.7223
 
-Epoch 5/10
+Epoch 5/5
 
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2974 - accuracy: 0.8910
-
-Epoch 6/10
-
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2676 - accuracy: 0.9016
-
-Epoch 7/10
-
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2466 - accuracy: 0.9070
-
-Epoch 8/10
-
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2312 - accuracy: 0.9133
-
-Epoch 9/10
-
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2202 - accuracy: 0.9155
-
-Epoch 10/10
-
-1576/1576 [==============================] - 8s 5ms/step - loss: 0.2050 - accuracy: 0.9188
+1576/1576 [==============================] - 20s 13ms/step - loss: 0.7683 - accuracy: 0.7468

@@ -65,24 +65,37 @@ def train(data):
 
     model = tf.keras.models.Sequential(
         [
-            tf.keras.layers.Conv2D(
+            tf.keras.layers.Flatten(
                 input_shape=(32, 32, 1),
-                kernel_size=5,
-                filters=8,
-                strides=1,
-                activation="relu",
-                kernel_initializer="variance_scaling",
             ),
-            tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
-            tf.keras.layers.Conv2D(
-                kernel_size=5,
-                filters=16,
-                strides=1,
+            tf.keras.layers.Dense(
+                units=32 * 32,
                 activation="relu",
-                kernel_initializer="variance_scaling",
             ),
-            tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
-            tf.keras.layers.Flatten(),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
+            tf.keras.layers.Dense(
+                units=32 * 32,
+                activation="relu",
+            ),
             tf.keras.layers.Dense(
                 units=len(chars),
                 kernel_initializer="variance_scaling",
@@ -95,7 +108,7 @@ def train(data):
     model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
 
     print(imgs.shape, labels.shape)
-    model.fit(imgs.reshape(len(imgs), 32, 32, 1), labels, epochs=10)
+    model.fit(imgs.reshape(len(imgs), 32, 32, 1), labels, epochs=5)
     return model
 
 
