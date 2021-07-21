@@ -93,10 +93,6 @@ def train(data):
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=32 * 32,
-                activation="relu",
-            ),
-            tf.keras.layers.Dense(
                 units=len(chars),
                 kernel_initializer="variance_scaling",
                 activation="softmax",
