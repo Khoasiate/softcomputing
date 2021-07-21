@@ -88,7 +88,7 @@ def train(data):
                 activation="relu",
             ),
             tf.keras.layers.Dense(
-                units=400,
+                units=200,
                 activation="relu",
             ),
             tf.keras.layers.Dense(
