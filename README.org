@@ -18,39 +18,37 @@ CNN-Model für 256x32 Bilder mit zusätzlicher Dense-Layer für jedes Output tra
 | dense_2 (Dense)   | (None, 1024) | 1049600 | dense_1      |
 | dense_3 (Dense)   | (None, 1024) | 1049600 | dense_2      |
 | dense_4 (Dense)   | (None, 1024) | 1049600 | dense_3      |
-| dense_5 (Dense)   | (None, 1024) | 1049600 | dense_4      |
-| dense_6 (Dense)   | (None, 62)   |   63550 | dense_5      |
+| dense_5 (Dense)   | (None, 62)   |   63550 | dense_4      |
 
 
-Total params: 6,361,150
+Total params: 5,311,550
 
-Trainable params: 6,361,150
+Trainable params: 5,311,550
 
 Non-trainable params: 0
 
-
 ** Evaluation
 
-394/394 - 2s - loss: 1.2158 - accuracy: 0.6880
+394/394 - 1s - loss: 1.1966 - accuracy: 0.7081
 
 ** Trainingsausgabe
 
 Epoch 1/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 2.8792 - accuracy: 0.1980
+1576/1576 [==============================] - 15s 10ms/step - loss: 2.5488 - accuracy: 0.2905
 
 Epoch 2/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 1.0697 - accuracy: 0.6557
+1576/1576 [==============================] - 15s 9ms/step - loss: 0.9011 - accuracy: 0.7091
 
 Epoch 3/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.8693 - accuracy: 0.7190
+1576/1576 [==============================] - 15s 9ms/step - loss: 0.7338 - accuracy: 0.7517
 
 Epoch 4/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.7433 - accuracy: 0.7558
+1576/1576 [==============================] - 15s 9ms/step - loss: 0.6427 - accuracy: 0.7829
 
 Epoch 5/5
 
-1576/1576 [==============================] - 18s 11ms/step - loss: 0.6561 - accuracy: 0.7772
+1576/1576 [==============================] - 15s 10ms/step - loss: 0.5840 - accuracy: 0.7996
