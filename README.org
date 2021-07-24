@@ -31,7 +31,7 @@ Non-trainable params: 0
 
 ** Evaluation
 
-394/394 - 1s - loss: 1.1676 - accuracy: 0.7995
+394/394 - 1s - loss: 1.1676 - accuracy: 0.8088
 
 ** Trainingsausgabe
 
