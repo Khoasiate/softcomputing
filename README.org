@@ -1,0 +1,136 @@
+#+TITLE: Softcomputing
+
+
+
+* Model
+
+CNN-Modele für 512x32 Bilder mit 4 zusätzlichen Dense-Layern für jedes Output trainiert mit 100, 200, 300 und 400 Ordnern.
+
+
+
+** Model-Summary
+
+| Layer (type)                   | Output Shape        | Param # | Connected to         |
+|--------------------------------+---------------------+--------+-----------------------|
+| input_1 (InputLayer)          | [(None, 32, 512, 1)] | 0      |                       |
+| conv2d (Conv2D)               | (None, 28, 508, 32)  | 832    |     input_1           |
+| max_pooling2d (MaxPooling2D)  | (None, 14, 254, 32)  | 0      |     conv2d            |
+| conv2d_1 (Conv2D)             | (None, 10, 250, 64)  | 51264  |     max_pooling2d     |
+| max_pooling2d_1 (MaxPooling2D)| (None, 5, 125, 64)   | 0      |     conv2d_1          |
+| conv2d_2 (Conv2D)             | (None, 3, 123, 128)  | 73856  |     max_pooling2d_1   |
+| max_pooling2d_2 (MaxPooling2D)| (None, 3, 61, 128)   | 0      |     conv2d_2          |
+| conv2d_3 (Conv2D)             | (None, 1, 59, 256)   | 295168 |     max_pooling2d_2   |
+| max_pooling2d_3 (MaxPooling2D)| (None, 1, 29, 256)   | 0      |     conv2d_3          |
+| flatten (Flatten)             | (None, 7424)         | 0      |     max_pooling2d_3   |
+| dense_3 (Dense)               | (None, 800)          | 5940000|     flatten           |
+| dense_7 (Dense)               | (None, 800)          | 5940000|     flatten           |
+| dense_11 (Dense)              | (None, 800)          | 5940000|     flatten           |
+| dense_15 (Dense)              | (None, 800)          | 5940000|     flatten           |
+| dense_19 (Dense)              | (None, 800)          | 5940000|     flatten           |
+| dense_23 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_27 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_31 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_35 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_39 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_43 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_47 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_51 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_55 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_59 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_63 (Dense)              | (None, 800)          | 5940000|     flatten   	    |
+| dense_2 (Dense)               | (None, 800)          | 640800 |     dense_3   	    |
+| dense_6 (Dense)               | (None, 800)          | 640800 |     dense_7   	    |
+| dense_10 (Dense)              | (None, 800)          | 640800 |     dense_11  	    |
+| dense_14 (Dense)              | (None, 800)          | 640800 |     dense_15  	    |
+| dense_18 (Dense)              | (None, 800)          | 640800 |     dense_19  	    |
+| dense_22 (Dense)              | (None, 800)          | 640800 |     dense_23  	    |
+| dense_26 (Dense)              | (None, 800)          | 640800 |     dense_27  	    |
+| dense_30 (Dense)              | (None, 800)          | 640800 |     dense_31  	    |
+| dense_34 (Dense)              | (None, 800)          | 640800 |     dense_35  	    |
+| dense_38 (Dense)              | (None, 800)          | 640800 |     dense_39  	    |
+| dense_42 (Dense)              | (None, 800)          | 640800 |     dense_43  	    |
+| dense_46 (Dense)              | (None, 800)          | 640800 |     dense_47  	    |
+| dense_50 (Dense)              | (None, 800)          | 640800 |     dense_51  	    |
+| dense_54 (Dense)              | (None, 800)          | 640800 |     dense_55  	    |
+| dense_58 (Dense)              | (None, 800)          | 640800 |     dense_59  	    |
+| dense_62 (Dense)              | (None, 800)          | 640800 |     dense_63  	    |
+| dense_1 (Dense)               | (None, 800)          | 640800 |     dense_2           |
+| dense_5 (Dense)               | (None, 800)          | 640800 |     dense_6           |
+| dense_9 (Dense)               | (None, 800)          | 640800 |     dense_10          |
+| dense_13 (Dense)              | (None, 800)          | 640800 |     dense_14          |
+| dense_17 (Dense)              | (None, 800)          | 640800 |     dense_18          |
+| dense_21 (Dense)              | (None, 800)          | 640800 |     dense_22          |
+| dense_25 (Dense)              | (None, 800)          | 640800 |     dense_26          |
+| dense_29 (Dense)              | (None, 800)          | 640800 |     dense_30          |
+| dense_33 (Dense)              | (None, 800)          | 640800 |     dense_34          |
+| dense_37 (Dense)              | (None, 800)          | 640800 |     dense_38          |
+| dense_41 (Dense)              | (None, 800)          | 640800 |     dense_42          |
+| dense_45 (Dense)              | (None, 800)          | 640800 |     dense_46          |
+| dense_49 (Dense)              | (None, 800)          | 640800 |     dense_50          |
+| dense_53 (Dense)              | (None, 800)          | 640800 |     dense_54          |
+| dense_57 (Dense)              | (None, 800)          | 640800 |     dense_58          |
+| dense_61 (Dense)              | (None, 800)          | 640800 |     dense_62          |
+| dense (Dense)                 | (None, 800)          | 640800 |     dense_1           |
+| dense_4 (Dense)               | (None, 800)          | 640800 |     dense_5           |
+| dense_8 (Dense)               | (None, 800)          | 640800 |     dense_9           |
+| dense_12 (Dense)              | (None, 800)          | 640800 |     dense_13          |
+| dense_16 (Dense)              | (None, 800)          | 640800 |     dense_17          |
+| dense_20 (Dense)              | (None, 800)          | 640800 |     dense_21          |
+| dense_24 (Dense)              | (None, 800)          | 640800 |     dense_25          |
+| dense_28 (Dense)              | (None, 800)          | 640800 |     dense_29          |
+| dense_32 (Dense)              | (None, 800)          | 640800 |     dense_33          |
+| dense_36 (Dense)              | (None, 800)          | 640800 |     dense_37          |
+| dense_40 (Dense)              | (None, 800)          | 640800 |     dense_41          |
+| dense_44 (Dense)              | (None, 800)          | 640800 |     dense_45          |
+| dense_48 (Dense)              | (None, 800)          | 640800 |     dense_49          |
+| dense_52 (Dense)              | (None, 800)          | 640800 |     dense_53          |
+| dense_56 (Dense)              | (None, 800)          | 640800 |     dense_57          |
+| dense_60 (Dense)              | (None, 800)          | 640800 |     dense_61          |
+| output_0 (Dense)              | (None, 63)           | 50463  |     dense             |
+| output_1 (Dense)              | (None, 63)           | 50463  |     dense_4           |
+| output_2 (Dense)              | (None, 63)           | 50463  |     dense_8           |
+| output_3 (Dense)              | (None, 63)           | 50463  |     dense_12          |
+| output_4 (Dense)              | (None, 63)           | 50463  |     dense_16          |
+| output_5 (Dense)              | (None, 63)           | 50463  |     dense_20          |
+| output_6 (Dense)              | (None, 63)           | 50463  |     dense_24          |
+| output_7 (Dense)              | (None, 63)           | 50463  |     dense_28          |
+| output_8 (Dense)              | (None, 63)           | 50463  |     dense_32          |
+| output_9 (Dense)              | (None, 63)           | 50463  |     dense_36          |
+| output_10 (Dense)             | (None, 63)           | 50463  |     dense_40          |
+| output_11 (Dense)             | (None, 63)           | 50463  |     dense_44          |
+| output_12 (Dense)             | (None, 63)           | 50463  |     dense_48          |
+| output_13 (Dense)             | (None, 63)           | 50463  |     dense_52          |
+| output_14 (Dense)             | (None, 63)           | 50463  |     dense_56          |
+| output_15 (Dense)             | (None, 63)           | 50463  |     dense_60          |
+
+
+Total params: 127,026,928
+
+Trainable params: 127,026,928
+
+Non-trainable params: 0
+
+** Evaluation
+
+0.
+1896/1896 - 48s - loss: 14.0914 - output_0_loss: 1.2495 - output_1_loss: 0.9833 - output_2_loss: 1.2566 - output_3_loss: 1.4451 - output_4_loss: 1.5430 - output_5_loss: 1.5153 - output_6_loss: 1.4626 - output_7_loss: 1.3342 - 
+output_8_loss: 1.0451 - output_9_loss: 0.7677 - output_10_loss: 0.5306 - output_11_loss: 0.3899 - output_12_loss: 0.2668 - output_13_loss: 0.1719 - output_14_loss: 0.0597 - output_15_loss: 0.0701 - 
+output_0_accuracy: 0.6678 - output_1_accuracy: 0.7274 - output_2_accuracy: 0.6620 - output_3_accuracy: 0.6143 - output_4_accuracy: 0.5805 - output_5_accuracy: 0.5755 - output_6_accuracy: 0.5884 - output_7_accuracy: 0.6306 - 
+output_8_accuracy: 0.7044 - output_9_accuracy: 0.7886 - output_10_accuracy: 0.8613 - output_11_accuracy: 0.9135 - output_12_accuracy: 0.9520 - output_13_accuracy: 0.9763 - output_14_accuracy: 0.9893 - output_15_accuracy: 0.9956
+
+1.
+1895/1895 - 59s - loss: 13.6441 - output_0_loss: 1.2357 - output_1_loss: 0.9915 - output_2_loss: 1.2455 - output_3_loss: 1.3952 - output_4_loss: 1.4671 - output_5_loss: 1.4893 - output_6_loss: 1.4244 - output_7_loss: 1.2548 - 
+output_8_loss: 1.0208 - output_9_loss: 0.7599 - output_10_loss: 0.5159 - output_11_loss: 0.4259 - output_12_loss: 0.2039 - output_13_loss: 0.1095 - output_14_loss: 0.0605 - output_15_loss: 0.0442 - 
+output_0_accuracy: 0.6688 - output_1_accuracy: 0.7301 - output_2_accuracy: 0.6700 - output_3_accuracy: 0.6243 - output_4_accuracy: 0.5998 - output_5_accuracy: 0.5871 - output_6_accuracy: 0.5975 - output_7_accuracy: 0.6424 - 
+output_8_accuracy: 0.7098 - output_9_accuracy: 0.7912 - output_10_accuracy: 0.8622 - output_11_accuracy: 0.9158 - output_12_accuracy: 0.9520 - output_13_accuracy: 0.9762 - output_14_accuracy: 0.9887 - output_15_accuracy: 0.9952
+2.
+1841/1841 - 60s - loss: 12.8342 - output_0_loss: 1.1416 - output_1_loss: 0.8837 - output_2_loss: 1.1388 - output_3_loss: 1.2756 - output_4_loss: 1.3699 - output_5_loss: 1.4146 - output_6_loss: 1.3664 - output_7_loss: 1.2345 - 
+output_8_loss: 0.9966 - output_9_loss: 0.7460 - output_10_loss: 0.5179 - output_11_loss: 0.3379 - output_12_loss: 0.2010 - output_13_loss: 0.1071 - output_14_loss: 0.0627 - output_15_loss: 0.0397 - 
+output_0_accuracy: 0.6949 - output_1_accuracy: 0.7587 - output_2_accuracy: 0.6999 - output_3_accuracy: 0.6589 - output_4_accuracy: 0.6343 - output_5_accuracy: 0.6067 - output_6_accuracy: 0.6205 - output_7_accuracy: 0.6606 - 
+output_8_accuracy: 0.7230 - output_9_accuracy: 0.7949 - output_10_accuracy: 0.8649 - output_11_accuracy: 0.9193 - output_12_accuracy: 0.9534 - output_13_accuracy: 0.9767 - output_14_accuracy: 0.9895 - output_15_accuracy: 0.9957
+3.
+1896/1896 - 65s - loss: 17.5568 - output_0_loss: 1.7305 - output_1_loss: 1.4095 - output_2_loss: 1.7326 - output_3_loss: 1.8979 - output_4_loss: 1.9378 - output_5_loss: 1.8930 - output_6_loss: 1.7818 - output_7_loss: 1.5328 - output_8_loss: 1.2234 - 
+output_9_loss: 0.8851 - output_10_loss: 0.6200 - output_11_loss: 0.4140 - output_12_loss: 0.2305 - output_13_loss: 0.1300 - output_14_loss: 0.0957 - output_15_loss: 0.0422 - 
+output_0_accuracy: 0.5442 - output_1_accuracy: 0.6154 - output_2_accuracy: 0.5387 - output_3_accuracy: 0.4912 - output_4_accuracy: 0.4766 - output_5_accuracy: 0.4794 - output_6_accuracy: 0.5055 - output_7_accuracy: 0.5787 - output_8_accuracy: 0.6685 - 
+output_9_accuracy: 0.7612 - output_10_accuracy: 0.8457 - output_11_accuracy: 0.9066 - output_12_accuracy: 0.9482 - output_13_accuracy: 0.9760 - output_14_accuracy: 0.9889 - output_15_accuracy: 0.9955
+
